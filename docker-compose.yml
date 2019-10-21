@@ -1,0 +1,16 @@
+version: "3.5"
+services:
+  docker-mysql:
+     image: mysql:5.7
+     container_name: docker-mysql
+     environment:
+       - MYSQL_ROOT_PASSWORD="Janna@05"
+       - MYSQL_DATABASE="admin"  
+       - MYSQL_PASSWORD="admin"
+     ports:
+      - 3306:3306  
+   
+   
+   
+  
+   
