@@ -1,14 +1,16 @@
 version: "3"
 services: 
-  db: 
+  db:
+    image: mysql:5.7
     container_name: db-mysql
-    environment: 
-      - MYSQL_ROOT_PASSWORD=rootpasswd
-      - MYSQL_DATABASE=notes_app
-      - MYSQL_USER=webmail
-      - MYSQL_PASSWORD=webmail
-    image: "mysql:5.7"
+    ports:
+      - "3306:3306"
     restart: always
+    environment:
+      MYSQL_DATABASE: notes_app
+      MYSQL_USER: webmail
+      MYSQL_PASSWORD: webmail
+      MYSQL_ROOT_PASSWORD: root
     volumes: 
       - "db_data:/var/lib/mysql"
   spring-boot-mysql-rest-api: 
@@ -18,12 +20,13 @@ services:
     depends_on: 
       - db
     environment: 
-          - SPRING-BOOT-MYSQL-REST-API_DB_HOST = 3306 
-          - SPRING-BOOT-MYSQL-REST-API_DB_USER = webmail 
-          - SPRING-BOOT-MYSQL-REST-API_DB_PASSWORD = webmail"
+          - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/notes_app?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false 
+          - SPRING_DATASOURCE_USERNAME=webmail 
+          - SPRING_DATASOURCE_PASSWORD=webmail
     image: "ahmedelshfie/spring-boot-mysql-rest-api"
+    container_name: spring-api
     ports: 
-      - 8085
+      - "8085:8085"
     restart: always
     volumes: 
       - /data/springboot-docker-compose-app
