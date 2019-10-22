@@ -1,17 +1,31 @@
-version: "3.5"
-services:
-  docker-mysql:
-     image: mysql:5.7
-     container_name: db-mysql
-     environment:
-        - MYSQL_ROOT_PASSWORD=rootpasswd
-        - MYSQL_DATABASE=notes_app
-        - MYSQL_USER=webmail
-        - MYSQL_PASSWORD=webmail
-     ports:
-      - 3306:3306  
-   
-   
-   
-  
-   
+version: "3"
+services: 
+  db: 
+    container_name: db-mysql
+    environment: 
+      - MYSQL_ROOT_PASSWORD=rootpasswd
+      - MYSQL_DATABASE=notes_app
+      - MYSQL_USER=webmail
+      - MYSQL_PASSWORD=webmail
+    image: "mysql:5.7"
+    restart: always
+    volumes: 
+      - "db_data:/var/lib/mysql"
+  spring-boot-mysql-rest-api: 
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    depends_on: 
+      - db
+    environment: 
+          - SPRING-BOOT-MYSQL-REST-API_DB_HOST = 3306 
+          - SPRING-BOOT-MYSQL-REST-API_DB_USER = webmail 
+          - SPRING-BOOT-MYSQL-REST-API_DB_PASSWORD = webmail"
+    image: "ahmedelshfie/spring-boot-mysql-rest-api"
+    ports: 
+      - 8085
+    restart: always
+    volumes: 
+      - /data/springboot-docker-compose-app
+volumes: 
+  db_data: ~
