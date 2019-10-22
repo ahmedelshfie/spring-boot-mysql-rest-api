@@ -1,6 +1,6 @@
-C:\ENV\projects\spring-boot-mysql-rest-api-tutorial-master\src\main\java\com\example\easynotes\repository\NoteRepository.java
-C:\ENV\projects\spring-boot-mysql-rest-api-tutorial-master\src\main\java\com\example\easynotes\controller\IndexController.java
-C:\ENV\projects\spring-boot-mysql-rest-api-tutorial-master\src\main\java\com\example\easynotes\controller\NoteController.java
-C:\ENV\projects\spring-boot-mysql-rest-api-tutorial-master\src\main\java\com\example\easynotes\exception\ResourceNotFoundException.java
-C:\ENV\projects\spring-boot-mysql-rest-api-tutorial-master\src\main\java\com\example\easynotes\EasyNotesApplication.java
-C:\ENV\projects\spring-boot-mysql-rest-api-tutorial-master\src\main\java\com\example\easynotes\model\Note.java
+c:\ENV\projects\spring-boot-mysql-rest-api-tutorial\src\main\java\com\example\easynotes\repository\NoteRepository.java
+c:\ENV\projects\spring-boot-mysql-rest-api-tutorial\src\main\java\com\example\easynotes\controller\IndexController.java
+c:\ENV\projects\spring-boot-mysql-rest-api-tutorial\src\main\java\com\example\easynotes\EasyNotesApplication.java
+c:\ENV\projects\spring-boot-mysql-rest-api-tutorial\src\main\java\com\example\easynotes\exception\ResourceNotFoundException.java
+c:\ENV\projects\spring-boot-mysql-rest-api-tutorial\src\main\java\com\example\easynotes\controller\NoteController.java
+c:\ENV\projects\spring-boot-mysql-rest-api-tutorial\src\main\java\com\example\easynotes\model\Note.java
