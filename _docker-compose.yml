@@ -7,10 +7,10 @@ services:
        - db_data:/var/lib/mysql
      restart: always
      environment:
-       MYSQL_ROOT_PASSWORD: Janna@05
+       MYSQL_ROOT_PASSWORD: passwordroot
        MYSQL_DATABASE: notes_app
-       MYSQL_USER: root	
-       MYSQL_PASSWORD: admin
+       MYSQL_USER: webmail	
+       MYSQL_PASSWORD: webmail
 
    wordpress:
      depends_on:
@@ -21,7 +21,7 @@ services:
      restart: always
      environment:
        WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: admin
-       WORDPRESS_DB_PASSWORD: admin
+       WORDPRESS_DB_USER: webmail
+       WORDPRESS_DB_PASSWORD: webmail
 volumes:
     db_data:
