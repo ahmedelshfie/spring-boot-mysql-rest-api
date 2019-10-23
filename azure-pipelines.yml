@@ -5,7 +5,7 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'pipelines-javascript-docker'
+  imageName: 'spring-boot-mysql-rest-api'
 
 steps:
 - task: Docker@2
