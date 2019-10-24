@@ -1,0 +1,235 @@
+options: 
+ - 
+   enabled: true
+  definition: 
+   id: "5d58cc01-7c75-450c-be18-a388ddb129ec"
+  inputs: 
+   branchFilters: "[\"+refs/heads/*\"]"
+   additionalFields: "{}"
+ - 
+   enabled: false
+  definition: 
+   id: "a9db38f9-9fdc-478c-b0f9-464221e58316"
+  inputs: 
+   workItemType: Issue
+   assignToRequestor: true
+   additionalFields: "{}"
+triggers: 
+ - 
+   branchFilters: 
+   - 
+   "+develop"
+  pathFilters: 
+  batchChanges: false
+  maxConcurrentBuildsPerBranch: 1
+  pollingInterval: 0
+  triggerType: 2
+ - 
+   branchFilters: 
+   - 
+   "+develop"
+  forks: 
+   enabled: true
+   allowSecrets: false
+  pathFilters: 
+  requireCommentsForNonTeamMembersOnly: false
+  isCommentRequiredForPullRequest: false
+  triggerType: 64
+variables: 
+ "system.debug": 
+  value: false
+  allowOverride: true
+properties: 
+tags: 
+_links: 
+ self: 
+  href: "https://dev.azure.com/ahmedelshfie/9ce0d9f0-6389-44c8-81be-8d38590a9b84/_apis/build/Definitions/11?revision=16"
+ web: 
+  href: "https://dev.azure.com/ahmedelshfie/9ce0d9f0-6389-44c8-81be-8d38590a9b84/_build/definition?definitionId=11"
+ editor: 
+  href: "https://dev.azure.com/ahmedelshfie/9ce0d9f0-6389-44c8-81be-8d38590a9b84/_build/designer?id=11&_a=edit-build-definition"
+ badge: 
+  href: "https://dev.azure.com/ahmedelshfie/9ce0d9f0-6389-44c8-81be-8d38590a9b84/_apis/build/status/11"
+buildNumberFormat: "$(date:yyyyMMdd)$(rev:.r)"
+comment: "delete user and password of docker hub "
+jobAuthorizationScope: 1
+jobTimeoutInMinutes: 60
+jobCancelTimeoutInMinutes: 5
+process: 
+ phases: 
+  - 
+   steps: 
+    - 
+   environment: 
+     enabled: true
+     continueOnError: false
+     alwaysRun: false
+     displayName: "Build an image"
+     timeoutInMinutes: 0
+     condition: "succeeded()"
+     task: 
+      id: "e28912f1-0114-4464-802a-a3a35437fd16"
+      versionSpec: "2.*"
+      definitionType: task
+     inputs: 
+      containerRegistry: "e2200493-999e-4e33-b3c0-04ab00ebdcc5"
+      repository: "ahmedelshfie/azure-easy-notes"
+      command: build
+      Dockerfile: "**/Dockerfile"
+      buildContext: "**"
+      tags: "0.0.2-SANPSHOT"
+      arguments: ""
+      addPipelineData: true
+    - 
+   environment: 
+     enabled: true
+     continueOnError: false
+     alwaysRun: false
+     displayName: "Push an image"
+     timeoutInMinutes: 0
+     condition: "succeeded()"
+     task: 
+      id: "e28912f1-0114-4464-802a-a3a35437fd16"
+      versionSpec: "2.*"
+      definitionType: task
+     inputs: 
+      containerRegistry: "e2200493-999e-4e33-b3c0-04ab00ebdcc5"
+      repository: "ahmedelshfie/azure-easy-notes"
+      command: push
+      Dockerfile: "**/Dockerfile"
+      buildContext: "**"
+      tags: "0.0.2-SANPSHOT"
+      arguments: ""
+      addPipelineData: true
+    - 
+   environment: 
+     enabled: true
+     continueOnError: false
+     alwaysRun: false
+     displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
+     timeoutInMinutes: 0
+     condition: "succeeded()"
+     task: 
+      id: "5bfb729a-a7c8-4a78-a7c3-8d717bb7c13c"
+      versionSpec: "2.*"
+      definitionType: task
+     inputs: 
+      SourceFolder: ""
+      Contents: "**/docker-compose.yml"
+      TargetFolder: "$(Build.ArtifactStagingDirectory)"
+      CleanTargetFolder: false
+      OverWrite: false
+      flattenFolders: false
+      preserveTimestamp: false
+    - 
+   environment: 
+     enabled: true
+     continueOnError: false
+     alwaysRun: false
+     displayName: "Publish Artifact: drop"
+     timeoutInMinutes: 0
+     condition: "succeeded()"
+     task: 
+      id: "2ff763a7-ce83-4e1f-bc89-0ae63477cebe"
+      versionSpec: "1.*"
+      definitionType: task
+     inputs: 
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+      ArtifactName: drop
+      ArtifactType: Container
+      TargetPath: ""
+      Parallel: false
+      ParallelCount: 8
+      FileCopyOptions: ""
+   name: "Agent job spring-rest-api"
+   refName: Job_1
+   condition: "succeeded()"
+   target: 
+    executionOptions: 
+     type: 0
+    allowScriptsAuthAccessOption: false
+    type: 1
+   jobAuthorizationScope: projectCollection
+ target: 
+  agentSpecification: 
+   identifier: "ubuntu-16.04"
+ type: 1
+repository: 
+ properties: 
+  apiUrl: "https://api.github.com/repos/ahmedelshfie/spring-boot-mysql-rest-api"
+  branchesUrl: "https://api.github.com/repos/ahmedelshfie/spring-boot-mysql-rest-api/branches"
+  cloneUrl: "https://github.com/ahmedelshfie/spring-boot-mysql-rest-api.git"
+  connectedServiceId: "e7922d34-5e8b-479c-a54d-12c93a9ba8f1"
+  defaultBranch: master
+  fullName: "ahmedelshfie/spring-boot-mysql-rest-api"
+  hasAdminPermissions: True
+  isFork: False
+  isPrivate: False
+  lastUpdated: "10/23/2019 11:38:00"
+  manageUrl: "https://github.com/ahmedelshfie/spring-boot-mysql-rest-api"
+  nodeId: "MDEwOlJlcG9zaXRvcnkyMTY0NDgyOTc="
+  ownerId: 1489251
+  orgName: ahmedelshfie
+  refsUrl: "https://api.github.com/repos/ahmedelshfie/spring-boot-mysql-rest-api/git/refs"
+  safeRepository: "ahmedelshfie/spring-boot-mysql-rest-api"
+  shortName: "spring-boot-mysql-rest-api"
+  ownerAvatarUrl: "https://avatars0.githubusercontent.com/u/1489251?v=4"
+  archived: False
+  externalId: 216448297
+  ownerIsAUser: True
+  checkoutNestedSubmodules: false
+  cleanOptions: 0
+  fetchDepth: 0
+  gitLfsSupport: false
+  reportBuildStatus: true
+  skipSyncSource: false
+  labelSourcesFormat: "$(build.buildNumber)"
+  labelSources: 0
+ id: "ahmedelshfie/spring-boot-mysql-rest-api"
+ type: GitHub
+ name: "ahmedelshfie/spring-boot-mysql-rest-api"
+ url: "https://github.com/ahmedelshfie/spring-boot-mysql-rest-api.git"
+ defaultBranch: develop
+ clean: false
+ checkoutSubmodules: false
+processParameters: 
+quality: 1
+authoredBy: 
+ displayName: "Ahmed Ibrahim"
+ url: "https://spsprodsbr1.vssps.visualstudio.com/A158237c0-b270-4b81-a166-96186da3befd/_apis/Identities/078838bf-011f-6eff-8544-a62342238fe9"
+ _links: 
+  avatar: 
+   href: "https://dev.azure.com/ahmedelshfie/_apis/GraphProfile/MemberAvatars/msa.MDc4ODM4YmYtMDExZi03ZWZmLTg1NDQtYTYyMzQyMjM4ZmU5"
+ id: "078838bf-011f-6eff-8544-a62342238fe9"
+ uniqueName: "ahmedelshfie@gmail.com"
+ imageUrl: "https://dev.azure.com/ahmedelshfie/_apis/GraphProfile/MemberAvatars/msa.MDc4ODM4YmYtMDExZi03ZWZmLTg1NDQtYTYyMzQyMjM4ZmU5"
+ descriptor: "msa.MDc4ODM4YmYtMDExZi03ZWZmLTg1NDQtYTYyMzQyMjM4ZmU5"
+drafts: 
+queue: 
+ _links: 
+  self: 
+   href: "https://dev.azure.com/ahmedelshfie/_apis/build/Queues/100"
+ id: 100
+ name: "Azure Pipelines"
+ url: "https://dev.azure.com/ahmedelshfie/_apis/build/Queues/100"
+ pool: 
+  id: 9
+  name: "Azure Pipelines"
+  isHosted: true
+id: 11
+name: "rest-api-Docker container-CI"
+url: "https://dev.azure.com/ahmedelshfie/9ce0d9f0-6389-44c8-81be-8d38590a9b84/_apis/build/Definitions/11?revision=16"
+uri: "vstfs:///Build/Definition/11"
+path: "\\"
+type: 2
+queueStatus: 0
+revision: 16
+createdDate: "2019-10-24T01:31:07.067Z"
+project: 
+ id: "9ce0d9f0-6389-44c8-81be-8d38590a9b84"
+ name: "rest-api"
+ url: "https://dev.azure.com/ahmedelshfie/_apis/projects/9ce0d9f0-6389-44c8-81be-8d38590a9b84"
+ state: wellFormed
+ revision: 123
+ visibility: 0
+ lastUpdateTime: "2019-10-23T14:04:31.497Z"
