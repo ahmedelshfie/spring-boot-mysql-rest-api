@@ -6,12 +6,12 @@ jobs: # a collection of steps
 
     docker: # run the steps with Docker
       - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/mysql:5.7
         environment:
           DATABASE_URL: jdbc:mysql://172.20.111.0:3306/notes_app?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
           MYSQL_DATABASE: notes_app
           MYSQL_webmail: webmail
           MYSQL_PASSWORD: webmail
-       - image: circleci/mysql:5.7  
 
     steps: # a collection of executable commands
 
