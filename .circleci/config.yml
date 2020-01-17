@@ -1,40 +1,4 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
-      - image: circleci/mysql:8.0.4
-        environment:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: notes_app
-          MYSQL_webmail: webmail
-          MYSQL_PASSWORD: webmail
-
-    steps:
-      - checkout
-      - run:
-      # Our primary container isn't MYSQL so run a sleep command until it's ready.
-          name: Waiting for MySQL to be ready
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
-      - run:
-          name: Install MySQL CLI; Import dummy data; run an example query
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u webmail -p webmail notes_app < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u webmail -p webmail --execute="SELECT * FROM notes_app.Persons"
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-  version: 2      
+version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     
@@ -66,5 +30,5 @@ jobs: # a collection of steps
       
       - store_artifacts: # store the uberjar as an artifact
       # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: target/easy-notes-1.0.0.jar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples   
+          path: target/websocket-demo-0.0.2-SNAPSHOT.jar
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples 
