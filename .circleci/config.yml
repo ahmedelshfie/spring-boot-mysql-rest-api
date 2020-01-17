@@ -10,7 +10,6 @@ jobs:
           MYSQL_DATABASE: notes_app
           MYSQL_webmail: webmail
           MYSQL_PASSWORD: webmail
-
     steps:
       - checkout
       - run:
