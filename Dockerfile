@@ -18,3 +18,4 @@ ADD ${JAR_FILE} easy-notes.jar
 
 # Run the jar file 
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/easy-notes.jar"]
+
