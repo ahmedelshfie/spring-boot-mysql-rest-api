@@ -6,13 +6,17 @@ jobs: # a collection of steps
 
     docker: # run the steps with Docker
       - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+      environment:
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_DB: notes_app
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_PASSWORD:
+      - image: mysql:5.7
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_bin --innodb-large-prefix=true --innodb-file-format=Barracuda
         environment:
-          MYSQL_HOST: 127.20.111.0
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: notes_app
-          MYSQL_webmail: webmail
-          MYSQL_PASSWORD: webmail
-      - image: circleci/mysql:5.7
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
 
     steps: # a collection of executable commands
 
