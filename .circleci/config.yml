@@ -6,6 +6,12 @@ jobs: # a collection of steps
 
     docker: # run the steps with Docker
       - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+        environment:
+          DP_DBNAME: "notes_app"
+          DP_USER: "root"
+          DP_PASSWORD: "Jannaelshfie0301"
+          DP_HOST: "rds-db.coujgxmfncr1.sa-east-1.rds.amazonaws.com"
+          DP_PORT: "3306"
 
     steps: # a collection of executable commands
 
